@@ -27,7 +27,7 @@ jobs:
           pyinstaller --onefile --noconsole --collect-all tkinterdnd2 --collect-all PIL pick_icon_pro_dnd_progress.py
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pick_icon_pro_dnd_progress
           path: dist/pick_icon_pro_dnd_progress.exe
