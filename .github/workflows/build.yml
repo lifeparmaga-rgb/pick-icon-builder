@@ -1,1 +1,33 @@
+name: Build EXE
 
+on:
+  push:
+    branches: [ main ]
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: |
+          pip install pyinstaller pillow tkinterdnd2
+
+      - name: Build EXE
+        run: |
+          pyinstaller --onefile --noconsole --collect-all tkinterdnd2 --collect-all PIL pick_icon_pro_dnd_progress.py
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: pick_icon_pro_dnd_progress
+          path: dist/pick_icon_pro_dnd_progress.exe
